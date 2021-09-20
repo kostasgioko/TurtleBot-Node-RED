@@ -1,0 +1,50 @@
+broker:
+  - name: "home_broker"
+    host: "155.207.33.189"
+    vhost: 'kostasgioko'
+    # vhost: '/'
+    global_ns: ""
+    transport:
+      type: "AMQP"
+      port: 8076
+    auth:
+      - type: "plain"
+        # username: "kostasgioko"
+        username: "bot"
+        # password: "MpxteAd6p2hJU7h"
+        password: "bot"
+
+connector:
+  - name: "teleop_connector"
+    type: "sub"
+    ros_endpoint:
+      name: "teleop_ros"
+      uri: "/cmd_vel_mux/input/teleop"
+      msg_type: "geometry_msgs/Twist"
+    broker_endpoint:
+      name: "teleop_nodered"
+      uri: "cmd_vel_mux.input.teleop"
+      exchange: "amq.topic"
+
+  - name: "send_goal_connector"
+    type: "sub"
+    ros_endpoint:
+      name: "send_goal_ros"
+      uri: "/send_goal_nodered"
+      msg_type: "geometry_msgs/Pose"
+    broker_endpoint:
+      name: "send_goal_nodered"
+      uri: "send_goal_nodered"
+      exchange: "amq.topic"
+
+  - name: "receive_goal_result"
+    type: "pub"
+    ros_endpoint:
+      name: "receive_goal_result_ros"
+      uri: "/goal_reached"
+      msg_type: "std_msgs/Bool"
+    broker_endpoint:
+      name: "receive_goal_result_nodered"
+      uri: "goal_reached"
+      exchange: "amq.topic"
+

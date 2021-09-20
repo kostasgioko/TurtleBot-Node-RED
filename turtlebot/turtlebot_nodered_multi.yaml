@@ -1,0 +1,83 @@
+broker:
+  - name: "home_broker"
+    host: "155.207.33.189"
+    vhost: 'kostasgioko'
+    # vhost: '/'
+    global_ns: ""
+    transport:
+      type: "AMQP"
+      port: 8076
+    auth:
+      - type: "plain"
+        # username: "kostasgioko"
+        username: "bot"
+        # password: "MpxteAd6p2hJU7h"
+        password: "bot"
+
+connector:
+  - name: "robot1_teleop_connector"
+    type: "sub"
+    ros_endpoint:
+      name: "robot1_teleop_ros"
+      uri: "/robot1/cmd_vel_mux/input/teleop"
+      msg_type: "geometry_msgs/Twist"
+    broker_endpoint:
+      name: "robot1_teleop_nodered"
+      uri: "robot1.cmd_vel_mux.input.teleop"
+      exchange: "amq.topic"
+
+  - name: "robot1_send_goal_connector"
+    type: "sub"
+    ros_endpoint:
+      name: "robot1_send_goal_ros"
+      uri: "/robot1_send_goal_nodered"
+      msg_type: "geometry_msgs/Pose"
+    broker_endpoint:
+      name: "robot1_send_goal_nodered"
+      uri: "robot1_send_goal_nodered"
+      exchange: "amq.topic"
+
+  - name: "robot1_receive_goal_result"
+    type: "pub"
+    ros_endpoint:
+      name: "robot1_receive_goal_result_ros"
+      uri: "/robot1_goal_reached"
+      msg_type: "std_msgs/Bool"
+    broker_endpoint:
+      name: "robot1_receive_goal_result_nodered"
+      uri: "robot1_goal_reached"
+      exchange: "amq.topic"
+
+  - name: "robot2_teleop_connector"
+    type: "sub"
+    ros_endpoint:
+      name: "robot2_teleop_ros"
+      uri: "/robot2/cmd_vel_mux/input/teleop"
+      msg_type: "geometry_msgs/Twist"
+    broker_endpoint:
+      name: "robot2_teleop_nodered"
+      uri: "robot2.cmd_vel_mux.input.teleop"
+      exchange: "amq.topic"
+
+  - name: "robot2_send_goal_connector"
+    type: "sub"
+    ros_endpoint:
+      name: "robot2_send_goal_ros"
+      uri: "/robot2_send_goal_nodered"
+      msg_type: "geometry_msgs/Pose"
+    broker_endpoint:
+      name: "robot2_send_goal_nodered"
+      uri: "robot2_send_goal_nodered"
+      exchange: "amq.topic"
+
+  - name: "robot2_receive_goal_result"
+    type: "pub"
+    ros_endpoint:
+      name: "robot2_receive_goal_result_ros"
+      uri: "/robot2_goal_reached"
+      msg_type: "std_msgs/Bool"
+    broker_endpoint:
+      name: "robot2_receive_goal_result_nodered"
+      uri: "robot2_goal_reached"
+      exchange: "amq.topic"
+
