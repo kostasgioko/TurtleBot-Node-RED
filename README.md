@@ -2,7 +2,7 @@
 
 ## A graphical application development methodology for remote robots in the context of cyber-physical systems.
 
-This project is part of my Thesis for the Electrical and Computer Engineering programme of Aristotle University of Thessaloniki.
+This project was part of my Diploma Thesis for the Electrical and Computer Engineering programme of Aristotle University of Thessaloniki.
 
 ## Abstract
 
@@ -28,7 +28,7 @@ Robot Side:
   Model Datasets:  
     - http://data.nvision2.eecs.yorku.ca/3DGEMS/
     - https://github.com/aws-robotics/aws-robomaker-small-house-world
-- ros2broker, https://github.com/klpanagi/ros2broker
+- ros2broker: https://github.com/klpanagi/ros2broker
 
 
 Broker Side:
